@@ -1,8 +1,9 @@
 use std::io;
 
 fn main() {
-    println!("guess the number!");
-    println!("please input your guess");
+    println!("guessing game!");
+
+    println!("guess the number");
 
     let mut guess = String::new();
 
@@ -11,4 +12,9 @@ fn main() {
         .expect("failed to read line");
 
     println!("you guessed: {guess}");
+
+    // let x = 7;
+    // let y = 67;
+
+    // println!("{x} plus {y} is equal to {}", x + y);
 }
