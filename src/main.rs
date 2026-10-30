@@ -21,13 +21,21 @@ fn main() {
             break;
         }
 
-        let Ok(guess) = guess.trim().parse::<u32>() else {
-            println!("please type a number");
-            continue;
+        // let Ok(guess) = guess.trim().parse::<u32>() 
+        //    else {
+        //     println!("please type a number");
+        //     continue;
+        // };
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
         };
 
-        println!("you guessed: {guess}");
-        println!("the secret number is: {secret}");
+        let Ok(guess) = guess.trim().parse::<u32>() else{}
+
+        //println!("you guessed: {guess}");
+        //println!("the secret number is: {secret}");
 
         // let x = 7;
         // let y = 67;
