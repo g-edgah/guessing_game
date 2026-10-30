@@ -4,28 +4,49 @@ use std::io;
 use rand::RngExt;
 
 fn main() {
-    println!("guessing game!");
+    loop {
+        println!("guessing game!");
 
-    println!("guess the number");
+        println!("guess the number(or press Q to quit)");
 
-    let mut guess = String::new();
-    let secret = rand::rng().random_range(1..=100);
+        let mut guess = String::new();
+        let secret: u32 = rand::rng().random_range(1..=100);
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("failed to read line");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("failed to read line");
 
-    println!("you guessed: {guess}");
-    println!("the secret number is: {secret}");
+        if guess.trim() == "q" || guess.trim() == "Q" {
+            println!("exiting!");
+            break;
+        }
 
-    // let x = 7;
-    // let y = 67;
+        let Ok(guess) = guess.trim().parse::<u32>() else {
+            println!("please type a number");
+            continue;
+        };
 
-    // println!("{x} plus {y} is equal to {}", x + y);
+        println!("you guessed: {guess}");
+        println!("the secret number is: {secret}");
 
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too low"),
-        Ordering::Equal => println!("You win!"),
-        Ordering::Greater => println!("Too high"),
+        // let x = 7;
+        // let y = 67;
+
+        // println!("{x} plus {y} is equal to {}", x + y);
+
+        match guess.cmp(&secret) {
+            Ordering::Less => {
+                println!("Too low");
+                println!("try again");
+            }
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+            Ordering::Greater => {
+                println!("Too high");
+                println!("try again");
+            }
+        }
     }
 }
