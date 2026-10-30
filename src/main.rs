@@ -1,5 +1,7 @@
-use rand::RngExt;
+use std::cmp::Ordering;
 use std::io;
+
+use rand::RngExt;
 
 fn main() {
     println!("guessing game!");
@@ -20,4 +22,10 @@ fn main() {
     // let y = 67;
 
     // println!("{x} plus {y} is equal to {}", x + y);
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too low"),
+        Ordering::Equal => println!("You win!"),
+        Ordering::Greater => println!("Too high"),
+    }
 }
